@@ -1,0 +1,54 @@
+<h1>{{comic.title}}</h1>
+<div class="wrap-image">
+  <img
+      [src]="comic.images[0].path + '/portrait_fantastic.' + comic.images[0].extension"
+      alt="Portada"
+      style="width: 20%"
+      *ngIf="
+        comic.images && comic.images.length > 0 && comic.images[0].path;
+        else noImage
+      "
+    />
+</div>
+
+  <p> <b>DESCRIPCION:</b>   {{comic.description}}</p>
+  <p> <b>ISBN:</b>   {{comic.isbn}}</p>
+  <p><b>NUMERO DE PAGINAS:</b>   {{comic.pageCount}}</p>
+  <p><b>CREADORES:</b> {{comic.creators | creators}}</p>
+  <!-- <p *ngFor="let creator of comic.creators">      \ \ \ \ \    {{creator.name}} ({{creator.role}})</p> -->
+  <p><b>FECHA DE SALIDA:    </b>{{comic.onsaleDate | date: 'shortDate' }}</p>
+  <button (click)="addToCollection()">Añadir a la coleccion</button>
+
+
+  <ng-template #noImage>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png"
+      alt="Sin Portada"
+      style="width: 100%"
+    />
+  </ng-template>
+
+
+<!-- Esto es un intento de poder seleccionar imagenes -->
+
+<!--
+  <div class="container">
+    <div class="full-view"></div>
+    <div class="preview-list">
+      <ul>
+          <li *ngFor="let image of comic.images;let i = index">
+              <input type="radio" [id]="'tab-' + i" name="gallery-group" ngClass="checked: index===1">
+              <label for="tab-1">
+                  <div class="tab">
+                      <img
+                      [src]="comic.images[0].path + '/portrait_fantastic.' + comic.images[0].extension" />
+                  </div>
+              </label>
+              <div class="content">
+                  <img
+                  [src]="comic.images[0].path + '/portrait_fantastic.' + comic.images[0].extension" />
+              </div>
+          </li>
+      </ul>
+    </div>
+</div> -->
